@@ -41,7 +41,7 @@ const resetBtn = document.querySelector(".reset-btn");
 const alarmSound = new Audio("/audioFile.wav");
 
 
-let timeLeft = 0;
+let timeLeft = 7;
 let isRunning = false;
 let currentMode = "focus";
 let completedPomodoros = 0;
