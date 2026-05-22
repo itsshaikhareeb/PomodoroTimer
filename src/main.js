@@ -56,16 +56,20 @@ updateTimer()
 
 let intervalId;
 
-startBtn.addEventListener("click", () => {
-  console.log("Started");
+function startTimer() {
+
   if (isRunning) return;
+
   isRunning = true;
 
   intervalId = setInterval(() => {
+
     if (timeLeft > 0) {
 
       timeLeft--;
+
       updateTimer();
+
     }
 
     else {
@@ -77,8 +81,12 @@ startBtn.addEventListener("click", () => {
       handleSessionEnd();
 
     }
+
   }, 1000);
 
+}
+startBtn.addEventListener("click", () => {
+  startTimer();
 });
 
 pauseBtn.addEventListener("click", () => {
@@ -149,10 +157,12 @@ function handleSessionEnd() {
     if (completedPomodoros % 4 === 0) { //after every 4 focus sessions..
 
       switchMode("longBreak");
+      startTimer();
 
     } else {
 
       switchMode("shortBreak");
+      startTimer();
 
     }
 
@@ -161,6 +171,7 @@ function handleSessionEnd() {
   else {
 
     switchMode("focus");
+    startTimer();
 
   }
 
