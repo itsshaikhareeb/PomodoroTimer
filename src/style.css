@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: #081f51;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(236, 212, 212);
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  gap: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons{
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.timer{
+  font-size: 1.2rem;
+}
+
+button:hover {
+  opacity: 0.8;
+} 
+
+.modes{
+  display: flex;
+  gap: 10px;
+}
