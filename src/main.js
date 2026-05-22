@@ -38,6 +38,8 @@ const pauseBtn = document.querySelector(".pause-btn");
 
 const resetBtn = document.querySelector(".reset-btn");
 
+const alarmSound = new Audio("/audioFile.wav");
+
 
 let timeLeft = 0;
 let isRunning = false;
@@ -74,9 +76,11 @@ function startTimer() {
 
     else {
 
-      clearInterval(intervalId);
+      clearInterval(intervalId); 
 
       isRunning = false;
+
+      alarmSound.play();
 
       handleSessionEnd();
 
