@@ -41,7 +41,7 @@ const resetBtn = document.querySelector(".reset-btn");
 const alarmSound = new Audio("/audioFile.wav");
 
 
-let timeLeft = 7;
+let timeLeft = 30;
 let isRunning = false;
 let currentMode = "focus";
 let completedPomodoros = 0;
@@ -90,11 +90,17 @@ function startTimer() {
 
 }
 startBtn.addEventListener("click", () => {
-  startTimer();
+
+  if (Notification.permission !== "granted") {
+    let hold = Notification.requestPermission();
+console.log("testing1",hold);
+}
+startTimer();
+
 });
 
 pauseBtn.addEventListener("click", () => {
-  console.log("Paused");
+  console.log("Paused"); 
   clearInterval(intervalId);
   isRunning = false;
 })
@@ -133,17 +139,17 @@ function switchMode(mode) {
   currentMode = mode;
 
   if (mode === "focus") {
-    timeLeft = 7
+    timeLeft = 30
     modeEl.innerText = "Focus Time";
   }
 
   else if (mode === "shortBreak") {
-    timeLeft = 3;
+    timeLeft = 10;
     modeEl.innerText = "Short Break";
   }
 
   else if (mode === "longBreak") {
-    timeLeft = 5;
+    timeLeft = 15;
     modeEl.innerText = "Long Break";
   }
   updateTimer();
@@ -159,12 +165,20 @@ function handleSessionEnd() {
       `Completed Sessions: ${completedPomodoros}`;
 
     if (completedPomodoros % 4 === 0) { //after every 4 focus sessions..
-
+      showNotification(
+        "Focus Session Complete!",
+        "Time for a break."
+      );
+      
       switchMode("longBreak");
       startTimer();
-
-    } else {
-
+      
+    } else { 
+      
+      showNotification(
+        "Focus Session Complete!",
+        "Time for a break."
+      );
       switchMode("shortBreak");
       startTimer();
 
@@ -174,6 +188,11 @@ function handleSessionEnd() {
 
   else {
 
+    showNotification(
+      "Break Complete!",
+      "Time to focus again."
+    );
+
     switchMode("focus");
     startTimer();
 
@@ -181,6 +200,19 @@ function handleSessionEnd() {
 
 }
 
+
+
+function showNotification(title, body) {
+
+  if (Notification.permission === "granted") {
+
+    new Notification(title, {
+      body: body,
+    });
+
+  }
+
+}
 
 
 
