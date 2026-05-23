@@ -44,3 +44,8 @@ button:hover {
   display: flex;
   gap: 10px;
 }
+
+.modes button{
+  border-radius: 5px;
+  padding: 2px 4px;
+}
